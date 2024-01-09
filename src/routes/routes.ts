@@ -9,9 +9,9 @@ const router = express.Router();
 
 //User Endpoints
 router.post('/create-appointment', consultController.createAppointmentController);
-router.put('/update-appointment/:id', consultController.updateAppointment);
-router.put('/delete-appointment/:id', consultController.deleteAppointment);
-router.get('/get-appointment/:id',consultController.getUserAppointments);
+router.put('/update-appointment/:id', consultController.updateAppointmentController);
+router.put('/delete-appointment/:id', consultController.deleteAppointmentController);
+router.get('/get-appointment/:id',consultController.getUserAppointmentsController);
 
 
 //Adm Endpoints

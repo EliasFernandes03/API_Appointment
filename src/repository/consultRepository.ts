@@ -7,7 +7,7 @@ export async function createAppointmentRepository(consultaData: ConsultAttribute
   return Consult.create(consultaComUuid);
 }
 
-export async function findAppointment(dia: string, horario: string): Promise<ConsultAttributes[]> {
+export async function findAppointmentRepository(dia: string, horario: string): Promise<ConsultAttributes[]> {
   try {
     const consultas = await Consult.findAll({
       where: {
@@ -22,7 +22,7 @@ export async function findAppointment(dia: string, horario: string): Promise<Con
   }
 }
 
-export async function findAppointmentById(id: string): Promise<ConsultAttributes | null> {
+export async function findAppointmentByIdRepository(id: string): Promise<ConsultAttributes | null> {
   try {
     const appointment = await Consult.findByPk(id);
     return appointment;
@@ -31,7 +31,7 @@ export async function findAppointmentById(id: string): Promise<ConsultAttributes
   }
 }
 
-export async function updateAppointment(id: string, newData: Partial<ConsultAttributes>): Promise<any> {
+export async function updateAppointmentRepository(id: string, newData: Partial<ConsultAttributes>): Promise<any> {
   try {
     const appointment = await Consult.findByPk(id);
 
@@ -46,7 +46,7 @@ export async function updateAppointment(id: string, newData: Partial<ConsultAttr
 }
 
 
-export async function findOneClientAppointment(id: string): Promise<any> {
+export async function getOneClientRepository(id: string): Promise<any> {
   return Consult.findOne({
     where: {
       id,
@@ -55,4 +55,4 @@ export async function findOneClientAppointment(id: string): Promise<any> {
   });
 }
 
-export default { createAppointmentRepository,findAppointment,findAppointmentById,updateAppointment,findOneClientAppointment };
+export default { createAppointmentRepository,findAppointmentRepository,findAppointmentByIdRepository,updateAppointmentRepository,getOneClientRepository };

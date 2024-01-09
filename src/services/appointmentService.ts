@@ -14,7 +14,7 @@ async function createAppointmentService(clientData: ClientAttributes, consultDat
     client = await createClient({ nome, telefone, modeloCarro, placaCarro });
   }
 
-  const consultaExistente = await consultRepository.findAppointment(dia, horario);
+  const consultaExistente = await consultRepository.findAppointmentRepository(dia, horario);
   if (consultaExistente.length > 0) {
     throw new Error('Já existe um agendamento marcado para esse dia e horário.');
   }
@@ -30,7 +30,7 @@ async function createAppointmentService(clientData: ClientAttributes, consultDat
   return newAppointment;
 }
 
-export async function updateAppointment(id: string, newData: Partial<ConsultAttributes>): Promise<any> {
+export async function updateAppointmentService(id: string, newData: Partial<ConsultAttributes>): Promise<any> {
   try {
     const appointment = await Consult.findByPk(id);
 
@@ -44,7 +44,7 @@ export async function updateAppointment(id: string, newData: Partial<ConsultAttr
       throw new Error('Dia e/ou horário não fornecidos corretamente.');
     }
 
-    const existingConsult = await consultRepository.findAppointment(dia, horario);
+    const existingConsult = await consultRepository.findAppointmentRepository(dia, horario);
     if (existingConsult.length > 0) {
       throw new Error('Já existe um agendamento marcado para o novo dia e horário.');
     }
@@ -56,7 +56,7 @@ export async function updateAppointment(id: string, newData: Partial<ConsultAttr
   }
 }
 
-async function softDeleteAppointment(id: string): Promise<void> {
+async function softDeleteAppointmentService(id: string): Promise<void> {
   try {
     const appointment = await Consult.findByPk(id);
 
@@ -73,7 +73,7 @@ async function softDeleteAppointment(id: string): Promise<void> {
 
 export async function getUserApointmentsService(id: string): Promise<any> {
   try {
-    const appointment = await consultRepository.findOneClientAppointment(id);
+    const appointment = await consultRepository.getOneClientRepository(id);
     console.log(appointment)
     return appointment;
    
@@ -82,4 +82,4 @@ export async function getUserApointmentsService(id: string): Promise<any> {
   }
 }
 
-export default { createAppointmentService,updateAppointment,softDeleteAppointment,getUserApointmentsService };
+export default { createAppointmentService,updateAppointmentService,softDeleteAppointmentService,getUserApointmentsService };

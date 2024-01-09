@@ -28,12 +28,12 @@ async function createAppointmentController(req: Request, res: Response): Promise
   }
 }
 
-async function updateAppointment(req: Request, res: Response): Promise<void> {
+async function updateAppointmentController(req: Request, res: Response): Promise<void> {
   try {
     const appointmentId = req.params.id; 
     const newData: Partial<ConsultAttributes> = req.body;
 
-    const updatedAppointment = await appointmentService.updateAppointment(appointmentId, newData);
+    const updatedAppointment = await appointmentService.updateAppointmentService(appointmentId, newData);
 
     res.status(200).json({ message: 'Agendamento atualizado com sucesso!', appointment: updatedAppointment });
   } catch (error) {
@@ -43,12 +43,12 @@ async function updateAppointment(req: Request, res: Response): Promise<void> {
 }
 
 
-async function deleteAppointment(req: Request, res: Response): Promise<void> {
+async function deleteAppointmentController(req: Request, res: Response): Promise<void> {
   try {
     const { id } = req.params; 
 
 
-    await appointmentService.softDeleteAppointment(id);
+    await appointmentService.softDeleteAppointmentService(id);
 
     res.status(200).json({ message: 'Agendamento deletado com sucesso.' });
   } catch (error) {
@@ -58,7 +58,7 @@ async function deleteAppointment(req: Request, res: Response): Promise<void> {
 }
 
 
-async function getUserAppointments(req: Request, res: Response): Promise<void> {
+async function getUserAppointmentsController(req: Request, res: Response): Promise<void> {
   try {
     const { id } = req.params;
 
@@ -76,4 +76,4 @@ async function getUserAppointments(req: Request, res: Response): Promise<void> {
   }
 }
 
-export default { createAppointmentController,updateAppointment,deleteAppointment,getUserAppointments };
+export default { createAppointmentController,updateAppointmentController,deleteAppointmentController,getUserAppointmentsController };
