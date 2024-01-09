@@ -1,7 +1,7 @@
 // index.ts
 import dotenv from 'dotenv';
 import express, { Request, Response } from 'express';
-import { sequelize } from './database/connection';
+import { inicializarBancoDados } from './services/databaseInitializer';
 
 // Carrega as variáveis de ambiente do arquivo .env
 dotenv.config();
@@ -9,14 +9,14 @@ dotenv.config();
 const app = express();
 const PORT = 3300;
 
-sequelize.authenticate()
+inicializarBancoDados()
   .then(() => {
-    console.log('Conexão bem sucedida com o banco de dados.');
+    console.log('Banco de dados inicializado com sucesso.');
   })
   .catch((error) => {
-    console.error('Erro ao conectar com o banco de dados:', error);
+    console.error('Erro ao inicializar banco de dados:', error);
   });
-
+  
 app.listen(PORT, () => {
   console.log(`Servidor está rodando em http://localhost:${PORT}`);
 });

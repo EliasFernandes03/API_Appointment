@@ -1,23 +1,22 @@
 import { DataTypes, Model } from 'sequelize';
 import {sequelize} from '../database/connection';
-import Cliente from './Client';
-import { ConsultaAttributes } from '../Interfaces/interfaces';
+import Client from './Client';
+import { ConsultAttributes } from '../Interfaces/interfaces';
 
-class Consulta extends Model<ConsultaAttributes> implements ConsultaAttributes {
-  public id!: number;
+class Consult extends Model<ConsultAttributes> implements ConsultAttributes {
+  public id!: string;
   public dia!: Date;
   public horario!: string;
-  public ClienteId!: number;
+  public ClientId!: number;
 
   // Relacionamento com Cliente
-  public readonly cliente?: Cliente;
+  public readonly client?: Client;
 }
 
-Consulta.init(
+Consult.init(
   {
     id: {
-      type: DataTypes.INTEGER.UNSIGNED,
-      autoIncrement: true,
+      type: DataTypes.STRING,
       primaryKey: true,
     },
     dia: {
@@ -28,18 +27,15 @@ Consulta.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    ClienteId: {
+    ClientId: {
       type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
     },
   },
   {
     sequelize,
-    modelName: 'Consulta',
+    modelName: 'Consult',
   }
 );
 
-Consulta.belongsTo(Cliente);
-Cliente.hasMany(Consulta);
-
-export default Consulta;
+export default Consult;

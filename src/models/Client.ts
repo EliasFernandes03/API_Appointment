@@ -1,24 +1,23 @@
 import { DataTypes, Model } from 'sequelize';
 import {sequelize} from '../database/connection';
-import { ClienteAttributes } from '../Interfaces/interfaces';
-import Consulta from './Consult';
+import { ClientAttributes } from '../Interfaces/interfaces';
+import Consult from './Consult';
 
-class Cliente extends Model<ClienteAttributes> implements ClienteAttributes {
-  public id!: number;
+class Client extends Model<ClientAttributes> implements ClientAttributes {
+  public id!: string;
   public nome!: string;
   public telefone!: string;
   public modeloCarro!: string;
   public placaCarro!: string;
 
   // Relacionamento com Consulta
-  public readonly consultas?: Consulta[];
+  public readonly consults?: Consult[];
 }
 
-Cliente.init(
+Client.init(
   {
     id: {
-      type: DataTypes.INTEGER.UNSIGNED,
-      autoIncrement: true,
+      type: DataTypes.STRING,
       primaryKey: true,
     },
     nome: {
@@ -40,11 +39,8 @@ Cliente.init(
   },
   {
     sequelize,
-    modelName: 'Cliente',
+    modelName: 'Client',
   }
 );
 
-Cliente.hasMany(Consulta);
-Consulta.belongsTo(Cliente);
-
-export default Cliente;
+export default Client;

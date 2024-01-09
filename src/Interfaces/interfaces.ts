@@ -1,17 +1,17 @@
 // Arquivo interfaces.ts
 
-export interface ClienteAttributes {
-    id: number;
+export interface ClientAttributes {
+    id: string;
     nome: string;
     telefone: string;
     modeloCarro: string;
     placaCarro: string;
   }
   
-  export interface ConsultaAttributes {
-    id: number;
+  export interface ConsultAttributes {
+    id: string;
     dia: Date;
     horario: string;
-    ClienteId: number;
+    ClientId: number;
   }
   
