@@ -1,13 +1,14 @@
 import { DataTypes, Model } from 'sequelize';
 import {sequelize} from '../database/connection';
 import Client from './Client';
-import { ConsultAttributes } from '../Interfaces/interfaces';
+import { ConsultAttributes } from '../interfaces/interfaces';
 
 class Consult extends Model<ConsultAttributes> implements ConsultAttributes {
   public id!: string;
-  public dia!: Date;
+  public dia!: string;
   public horario!: string;
-  public ClientId!: number;
+  public ClientId!: string;
+  public deleted!:boolean;
 
   // Relacionamento com Cliente
   public readonly client?: Client;
@@ -20,7 +21,7 @@ Consult.init(
       primaryKey: true,
     },
     dia: {
-      type: DataTypes.DATE,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     horario: {
@@ -28,13 +29,18 @@ Consult.init(
       allowNull: false,
     },
     ClientId: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.STRING,
       allowNull: false,
+    },
+    deleted: {
+      type: DataTypes.BOOLEAN,
+      allowNull:false,
     },
   },
   {
     sequelize,
     modelName: 'Consult',
+    timestamps:false
   }
 );
 

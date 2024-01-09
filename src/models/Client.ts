@@ -1,6 +1,6 @@
 import { DataTypes, Model } from 'sequelize';
 import {sequelize} from '../database/connection';
-import { ClientAttributes } from '../Interfaces/interfaces';
+import { ClientAttributes } from '../interfaces/interfaces';
 import Consult from './Consult';
 
 class Client extends Model<ClientAttributes> implements ClientAttributes {
@@ -40,6 +40,7 @@ Client.init(
   {
     sequelize,
     modelName: 'Client',
+    timestamps:false
   }
 );
 
