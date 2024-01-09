@@ -30,8 +30,8 @@ async function createAppointment(req: Request, res: Response): Promise<void> {
 
 async function updateAppointment(req: Request, res: Response): Promise<void> {
   try {
-    const appointmentId = req.params.id; // Id do agendamento a ser atualizado
-    const newData: Partial<ConsultAttributes> = req.body; // Novos dados a serem atualizados
+    const appointmentId = req.params.id; 
+    const newData: Partial<ConsultAttributes> = req.body;
 
     const updatedAppointment = await appointmentService.updateAppointment(appointmentId, newData);
 
@@ -45,9 +45,9 @@ async function updateAppointment(req: Request, res: Response): Promise<void> {
 
 async function deleteAppointment(req: Request, res: Response): Promise<void> {
   try {
-    const { id } = req.params; // Supondo que o ID seja passado nos parâmetros da requisição
+    const { id } = req.params; 
 
-    // Chame a função do serviço que atualiza o agendamento para marcá-lo como "deletado"
+
     await appointmentService.softDeleteAppointment(id);
 
     res.status(200).json({ message: 'Agendamento deletado com sucesso.' });
@@ -75,4 +75,5 @@ async function getUserAppointments(req: Request, res: Response): Promise<void> {
     res.status(500).json({ error: 'Erro ao buscar agendamento' });
   }
 }
+
 export default { createAppointment,updateAppointment,deleteAppointment,getUserAppointments };

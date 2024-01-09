@@ -11,5 +11,4 @@ router.put('/update-appointment/:id', consultController.updateAppointment);
 router.put('/delete-appointment/:id', consultController.deleteAppointment);
 router.get('/get-appointment/:id',consultController.getUserAppointments);
 
-
 export default router;

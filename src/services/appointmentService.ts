@@ -44,7 +44,6 @@ export async function updateAppointment(id: string, newData: Partial<ConsultAttr
       throw new Error('Dia e/ou horário não fornecidos corretamente.');
     }
 
-    // Verifica se existe uma consulta marcada para o novo dia e horário
     const existingConsult = await consultRepository.findAppointment(dia, horario);
     if (existingConsult.length > 0) {
       throw new Error('Já existe um agendamento marcado para o novo dia e horário.');
@@ -56,7 +55,6 @@ export async function updateAppointment(id: string, newData: Partial<ConsultAttr
     throw new Error('Erro ao atualizar agendamento: Favor preencher uma data válida');
   }
 }
-
 
 async function softDeleteAppointment(id: string): Promise<void> {
   try {
@@ -73,8 +71,6 @@ async function softDeleteAppointment(id: string): Promise<void> {
   }
 }
 
-// consultService.ts
-
 export async function getUserApointmentsService(id: string): Promise<any> {
   try {
     const appointment = await consultRepository.findOneClientAppointment(id);
@@ -85,6 +81,5 @@ export async function getUserApointmentsService(id: string): Promise<any> {
     throw new Error(`Erro ao buscar agendamento: ${error}`);
   }
 }
-
 
 export default { createAppointment,updateAppointment,softDeleteAppointment,getUserApointmentsService };
