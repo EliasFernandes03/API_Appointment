@@ -9,4 +9,6 @@ async function criarConsulta(consultaData: ConsultAttributes): Promise<any> {
   return Consult.create(consultaComUuid);
 }
 
+
+
 export default { criarConsulta };

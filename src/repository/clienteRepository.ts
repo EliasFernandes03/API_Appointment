@@ -6,6 +6,6 @@ export async function encontrarClientePorTelefone(telefone: string): Promise<any
 }
 
 export async function criarCliente(clienteData: any): Promise<any> {
-  const clienteComUuid = { ...clienteData, id: uuidv4() }; // Adicionar UUID v4 ao cliente
+  const clienteComUuid = { ...clienteData, id: uuidv4() };
   return Client.create(clienteComUuid);
 }
