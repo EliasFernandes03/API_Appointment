@@ -1,5 +1,3 @@
-// Arquivo interfaces.ts
-
 export interface ClientAttributes {
     id?: string;
     nome: string;
@@ -7,7 +5,8 @@ export interface ClientAttributes {
     modeloCarro: string;
     placaCarro: string;
   }
-  
+
+//Appointments
   export interface ConsultAttributes {
     id?: string;
     dia: string;
