@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import ConsultaService from '../services/consultaService';
+import ConsultaService from '../services/appointmentService';
 import { ClientAttributes, ConsultAttributes } from '../interfaces/interfaces'; 
 
 async function createAppointment(req: Request, res: Response): Promise<void> {
