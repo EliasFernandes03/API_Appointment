@@ -1,4 +1,3 @@
-// consultaRepository.ts
 import sequelize from 'sequelize';
 import Consult from '../models/Consult';
 import { Op } from 'sequelize';

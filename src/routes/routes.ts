@@ -1,5 +1,3 @@
-// routes/consultas.ts
-
 import express from 'express';
 import appointmentController from '../controllers/appointmentController';
 import admController from '../controllers/admController';

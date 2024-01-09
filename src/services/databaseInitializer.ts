@@ -1,5 +1,3 @@
-// src/services/databaseInitializer.ts
-
 import {sequelize} from '../database/connection';
 import Client from '../models/Client';
 import Consult from '../models/Consult';
