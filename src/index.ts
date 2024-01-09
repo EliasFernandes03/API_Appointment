@@ -1,9 +1,8 @@
-// index.ts
 import dotenv from 'dotenv';
 import express, { Request, Response } from 'express';
 import { inicializarBancoDados } from './services/databaseInitializer';
-
-// Carrega as variáveis de ambiente do arquivo .env
+import consultaRoutes from './routes/routes'; 
+import bodyParser from 'body-parser';
 dotenv.config();
 
 const app = express();
@@ -16,7 +15,15 @@ inicializarBancoDados()
   .catch((error) => {
     console.error('Erro ao inicializar banco de dados:', error);
   });
-  
+
+
+
+app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use('/consultas', consultaRoutes);
+
+
+
 app.listen(PORT, () => {
   console.log(`Servidor está rodando em http://localhost:${PORT}`);
 });
