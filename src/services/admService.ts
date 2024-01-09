@@ -1,11 +1,11 @@
 // consultaService.ts
-import { buscarConsultasPorDia, getAppointmentsMonth, getAppointmentsWeek } from '../repository/admRepository';
+import { getAppointmentsDayRepository, getAppointmentsMonth, getAppointmentsWeek } from '../repository/admRepository';
 
 export async function buscarConsultasPorDiaService(data: string): Promise<any> {
     try {
       // Aqui podemos adicionar validações extras, se necessário
   
-      const consultas = await buscarConsultasPorDia(data);
+      const consultas = await getAppointmentsDayRepository(data);
       return consultas;
     } catch (error) {
       throw new Error('Erro ao buscar as consultas do dia');

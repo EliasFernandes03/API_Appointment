@@ -4,7 +4,7 @@ import Consult from '../models/Consult';
 import { Op } from 'sequelize';
 import moment from 'moment';
 
-export async function buscarConsultasPorDia(dia: string): Promise<any> {
+export async function getAppointmentsDayRepository(dia: string): Promise<any> {
     try {
       const consultas = await Consult.findAll({
         where: sequelize.where(sequelize.fn('DATE', sequelize.col('dia')), '=', dia),
