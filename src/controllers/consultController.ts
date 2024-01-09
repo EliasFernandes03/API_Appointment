@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import appointmentService from '../services/appointmentService';
 import { ClientAttributes, ConsultAttributes } from '../interfaces/interfaces'; 
 
-async function createAppointment(req: Request, res: Response): Promise<void> {
+async function createAppointmentController(req: Request, res: Response): Promise<void> {
   try {
     const { nome, telefone, modeloCarro, placaCarro, dia, horario, } = req.body;
 
@@ -20,7 +20,7 @@ async function createAppointment(req: Request, res: Response): Promise<void> {
       deleted: false
     };
 
-    const newAppointment = await appointmentService.createAppointment(clientData, consultData); 
+    const newAppointment = await appointmentService.createAppointmentService(clientData, consultData); 
 
     res.status(201).json({ message: 'Agendamento agendada com sucesso!', consulta: newAppointment });
   } catch (error) {
@@ -76,4 +76,4 @@ async function getUserAppointments(req: Request, res: Response): Promise<void> {
   }
 }
 
-export default { createAppointment,updateAppointment,deleteAppointment,getUserAppointments };
+export default { createAppointmentController,updateAppointment,deleteAppointment,getUserAppointments };

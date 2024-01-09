@@ -2,7 +2,7 @@ import Consult from '../models/Consult';
 import { ConsultAttributes } from '../interfaces/interfaces';
 import { v4 as uuidv4 } from 'uuid';
 
-export async function createAppointment(consultaData: ConsultAttributes): Promise<any> {
+export async function createAppointmentRepository(consultaData: ConsultAttributes): Promise<any> {
   const consultaComUuid = { ...consultaData, id: uuidv4() }; 
   return Consult.create(consultaComUuid);
 }
@@ -55,4 +55,4 @@ export async function findOneClientAppointment(id: string): Promise<any> {
   });
 }
 
-export default { createAppointment,findAppointment,findAppointmentById,updateAppointment,findOneClientAppointment };
+export default { createAppointmentRepository,findAppointment,findAppointmentById,updateAppointment,findOneClientAppointment };

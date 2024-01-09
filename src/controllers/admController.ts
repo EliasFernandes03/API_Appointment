@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { buscarConsultasPorDiaService,buscarConsultasDaProximaSemanaService, getAppointmentsMonthService } from '../services/admService';
 
-export async function buscarConsultasPorDiaController(req: Request, res: Response): Promise<void> {
+export async function getAppointmentsDayController(req: Request, res: Response): Promise<void> {
     try {
       const { data } = req.body;
   
@@ -18,7 +18,7 @@ export async function buscarConsultasPorDiaController(req: Request, res: Respons
     }
 }
 
-export async function buscarConsultasDaProximaSemanaController(req: Request, res: Response): Promise<void> {
+export async function getAppointmentsWeekController(req: Request, res: Response): Promise<void> {
     try {
       const { data } = req.body;
   
@@ -50,4 +50,4 @@ export async function getAppointmentsMonthController(req: Request, res: Response
       res.status(500).json({ error: 'Erro ao buscar consultas do mês' });
     }
   }
-export default { buscarConsultasPorDiaController,buscarConsultasDaProximaSemanaController,getAppointmentsMonthController };
+export default { getAppointmentsDayController,getAppointmentsWeekController,getAppointmentsMonthController };

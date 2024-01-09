@@ -4,7 +4,7 @@ import consultRepository from '../repository/consultRepository';
 import { v4 as uuidv4 } from 'uuid';
 import Consult from '../models/Consult';
 
-async function createAppointment(clientData: ClientAttributes, consultData: ConsultAttributes): Promise<any> {
+async function createAppointmentService(clientData: ClientAttributes, consultData: ConsultAttributes): Promise<any> {
   const { nome, telefone, modeloCarro, placaCarro } = clientData;
   const { dia, horario } = consultData;
 
@@ -19,7 +19,7 @@ async function createAppointment(clientData: ClientAttributes, consultData: Cons
     throw new Error('Já existe um agendamento marcado para esse dia e horário.');
   }
 
-  const newAppointment = await consultRepository.createAppointment({
+  const newAppointment = await consultRepository.createAppointmentRepository({
     id: uuidv4(),
     dia,
     horario,
@@ -82,4 +82,4 @@ export async function getUserApointmentsService(id: string): Promise<any> {
   }
 }
 
-export default { createAppointment,updateAppointment,softDeleteAppointment,getUserApointmentsService };
+export default { createAppointmentService,updateAppointment,softDeleteAppointment,getUserApointmentsService };
