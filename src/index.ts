@@ -1,5 +1,5 @@
 import dotenv from 'dotenv';
-import express, { Request, Response } from 'express';
+import express from 'express';
 import { inicializarBancoDados } from './services/databaseInitializer';
 import consultaRoutes from './routes/routes'; 
 import bodyParser from 'body-parser';
@@ -17,10 +17,11 @@ inicializarBancoDados()
   });
 
 
-
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use('/consultas', consultaRoutes);
+
+
+app.use('/api', consultaRoutes);
 
 
 

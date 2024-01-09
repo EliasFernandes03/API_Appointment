@@ -1,6 +1,6 @@
 import { findByPhone, createClient } from '../repository/clientRepository';
 import { ClientAttributes, ConsultAttributes } from '../interfaces/interfaces';
-import consultRepository from '../repository/consultRepository';
+import consultRepository from '../repository/appointmentRepository';
 import { v4 as uuidv4 } from 'uuid';
 import Consult from '../models/Consult';
 

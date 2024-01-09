@@ -1,17 +1,17 @@
 // routes/consultas.ts
 
 import express from 'express';
-import consultController from '../controllers/consultController';
+import appointmentController from '../controllers/appointmentController';
 import admController from '../controllers/admController';
 import { verificarToken } from '../middleware/token';
 
 const router = express.Router();
 
 //User Endpoints
-router.post('/create-appointment', consultController.createAppointmentController);
-router.put('/update-appointment/:id', consultController.updateAppointmentController);
-router.put('/delete-appointment/:id', consultController.deleteAppointmentController);
-router.get('/get-appointment/:id',consultController.getUserAppointmentsController);
+router.post('/create-appointment', appointmentController.createAppointmentController);
+router.put('/update-appointment/:id', appointmentController.updateAppointmentController);
+router.put('/delete-appointment/:id', appointmentController.deleteAppointmentController);
+router.get('/get-appointment/:id',appointmentController.getUserAppointmentsController);
 
 
 //Adm Endpoints
