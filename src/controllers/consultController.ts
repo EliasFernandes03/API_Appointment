@@ -1,10 +1,10 @@
 import { Request, Response } from 'express';
-import ConsultaService from '../services/appointmentService';
+import appointmentService from '../services/appointmentService';
 import { ClientAttributes, ConsultAttributes } from '../interfaces/interfaces'; 
 
 async function createAppointment(req: Request, res: Response): Promise<void> {
   try {
-    const { nome, telefone, modeloCarro, placaCarro, dia, horario } = req.body;
+    const { nome, telefone, modeloCarro, placaCarro, dia, horario, } = req.body;
 
     const clientData: ClientAttributes = { 
       nome,
@@ -13,13 +13,14 @@ async function createAppointment(req: Request, res: Response): Promise<void> {
       placaCarro,
     };
 
-    const consultData: ConsultAttributes = { 
+    const consultData: ConsultAttributes = {
       dia,
       horario,
-      ClientId:"0"
+      ClientId: "0",
+      deleted: false
     };
 
-    const newAppointment = await ConsultaService.createAppointment(clientData, consultData); 
+    const newAppointment = await appointmentService.createAppointment(clientData, consultData); 
 
     res.status(201).json({ message: 'Agendamento agendada com sucesso!', consulta: newAppointment });
   } catch (error) {
@@ -27,4 +28,51 @@ async function createAppointment(req: Request, res: Response): Promise<void> {
   }
 }
 
-export default { createAppointment };
+async function updateAppointment(req: Request, res: Response): Promise<void> {
+  try {
+    const appointmentId = req.params.id; // Id do agendamento a ser atualizado
+    const newData: Partial<ConsultAttributes> = req.body; // Novos dados a serem atualizados
+
+    const updatedAppointment = await appointmentService.updateAppointment(appointmentId, newData);
+
+    res.status(200).json({ message: 'Agendamento atualizado com sucesso!', appointment: updatedAppointment });
+  } catch (error) {
+    console.error('Erro ao atualizar agendamento:', error);
+    res.status(500).json({ error: 'Erro ao atualizar agendamento' });
+  }
+}
+
+
+async function deleteAppointment(req: Request, res: Response): Promise<void> {
+  try {
+    const { id } = req.params; // Supondo que o ID seja passado nos parâmetros da requisição
+
+    // Chame a função do serviço que atualiza o agendamento para marcá-lo como "deletado"
+    await appointmentService.softDeleteAppointment(id);
+
+    res.status(200).json({ message: 'Agendamento deletado com sucesso.' });
+  } catch (error) {
+    console.error('Erro ao deletar agendamento:', error);
+    res.status(500).json({ error: 'Erro ao deletar agendamento' });
+  }
+}
+
+
+async function getUserAppointments(req: Request, res: Response): Promise<void> {
+  try {
+    const { id } = req.params;
+
+    const appointment = await appointmentService.getUserApointmentsService(id);
+
+    if (!appointment) {
+      res.status(404).json({ message: 'Agendamento não encontrado.' });
+      return;
+    }
+
+    res.status(200).json({ appointment });
+  } catch (error) {
+    console.error('Erro ao buscar agendamento:', error);
+    res.status(500).json({ error: 'Erro ao buscar agendamento' });
+  }
+}
+export default { createAppointment,updateAppointment,deleteAppointment,getUserAppointments };

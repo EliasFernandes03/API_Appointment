@@ -13,5 +13,6 @@ export interface ClientAttributes {
     dia: string;
     horario: string;
     ClientId: string;
+    deleted:boolean;
   }
   

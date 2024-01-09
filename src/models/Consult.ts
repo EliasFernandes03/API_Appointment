@@ -8,6 +8,7 @@ class Consult extends Model<ConsultAttributes> implements ConsultAttributes {
   public dia!: string;
   public horario!: string;
   public ClientId!: string;
+  public deleted!:boolean;
 
   // Relacionamento com Cliente
   public readonly client?: Client;
@@ -30,6 +31,10 @@ Consult.init(
     ClientId: {
       type: DataTypes.STRING,
       allowNull: false,
+    },
+    deleted: {
+      type: DataTypes.BOOLEAN,
+      allowNull:false,
     },
   },
   {

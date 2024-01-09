@@ -21,4 +21,38 @@ export async function findAppointment(dia: string, horario: string): Promise<Con
     throw new Error(`Erro ao buscar consultas por dia e horário: ${error}`);
   }
 }
-export default { createAppointment,findAppointment };
+
+export async function findAppointmentById(id: string): Promise<ConsultAttributes | null> {
+  try {
+    const appointment = await Consult.findByPk(id);
+    return appointment;
+  } catch (error) {
+    throw new Error(`Erro ao buscar agendamento por ID: ${error}`);
+  }
+}
+
+export async function updateAppointment(id: string, newData: Partial<ConsultAttributes>): Promise<any> {
+  try {
+    const appointment = await Consult.findByPk(id);
+
+    if (!appointment) {
+      throw new Error('Agendamento não encontrado.');
+    }
+    const updatedAppointment = await appointment.update(newData);
+    return updatedAppointment;
+  } catch (error) {
+    throw new Error(`Erro ao atualizar agendamento: ${error}`);
+  }
+}
+
+
+export async function findOneClientAppointment(id: string): Promise<any> {
+  return Consult.findOne({
+    where: {
+      id,
+      deleted: false,
+    },
+  });
+}
+
+export default { createAppointment,findAppointment,findAppointmentById,updateAppointment,findOneClientAppointment };
