@@ -10,7 +10,7 @@ export interface ClientAttributes {
   
   export interface ConsultAttributes {
     id?: string;
-    dia: Date;
+    dia: string;
     horario: string;
     ClientId: string;
   }

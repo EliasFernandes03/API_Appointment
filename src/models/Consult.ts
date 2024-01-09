@@ -5,7 +5,7 @@ import { ConsultAttributes } from '../interfaces/interfaces';
 
 class Consult extends Model<ConsultAttributes> implements ConsultAttributes {
   public id!: string;
-  public dia!: Date;
+  public dia!: string;
   public horario!: string;
   public ClientId!: string;
 
@@ -20,7 +20,7 @@ Consult.init(
       primaryKey: true,
     },
     dia: {
-      type: DataTypes.DATE,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     horario: {

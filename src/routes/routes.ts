@@ -1,10 +1,10 @@
 // routes/consultas.ts
 
 import express from 'express';
-import consultaController from '../controllers/consultaController';
+import consultController from '../controllers/consultController';
 
 const router = express.Router();
 
-router.post('/criar-consulta', consultaController.criarConsulta);
+router.post('/create-appointment', consultController.createAppointment);
 
 export default router;

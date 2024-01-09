@@ -1,27 +1,31 @@
-import { encontrarClientePorTelefone, criarCliente } from '../repository/clienteRepository';
+import { findByPhone, createClient } from '../repository/clientRepository';
 import { ClientAttributes, ConsultAttributes } from '../interfaces/interfaces';
-import consultaRepository from '../repository/consultaRepository';
+import consultRepository from '../repository/consultRepository';
 import { v4 as uuidv4 } from 'uuid';
 
-async function criarConsulta(clientData: ClientAttributes, consultData: ConsultAttributes): Promise<any> {
+async function createAppointment(clientData: ClientAttributes, consultData: ConsultAttributes): Promise<any> {
   const { nome, telefone, modeloCarro, placaCarro } = clientData;
   const { dia, horario } = consultData;
 
-  let cliente = await encontrarClientePorTelefone(telefone);
+  let client = await findByPhone(telefone);
 
-  if (!cliente) {
-    // Se não encontrar o cliente, cria um novo
-    cliente = await criarCliente({ nome, telefone, modeloCarro, placaCarro });
+  if (!client) {
+    client = await createClient({ nome, telefone, modeloCarro, placaCarro });
   }
 
-  const novaConsulta = await consultaRepository.criarConsulta({
+  const consultaExistente = await consultRepository.findAppointment(dia, horario);
+  if (consultaExistente.length > 0) {
+    throw new Error('Já existe um agendamento marcado para esse dia e horário.');
+  }
+
+  const newAppointment = await consultRepository.createAppointment({
     id: uuidv4(),
     dia,
     horario,
-    ClientId: cliente.id,
+    ClientId: client.id,
   });
 
-  return novaConsulta;
+  return newAppointment;
 }
 
-export default { criarConsulta };
+export default { createAppointment };
