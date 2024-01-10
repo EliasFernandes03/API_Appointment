@@ -9,19 +9,16 @@ Este repositório contém código referente a aplicação de marcação de agend
 - Será necessário instalar o git na máquina para efetuar comandos git,  `https://www.git-scm.com/downloads` faça o download da sua versão
 - Crie um diretório e clone para sua máquina `git clone https://github.com/EliasFernandes03/API_Appointment.git`
 - Dentro do diretorio raiz faça `npm install`
+
 ## Environment
 
-- Atentar para a presença da variável de ambiente `.env`. O arquivo `.env.template` estabelece as variáveis necessárias.
+- Atentar para a presença das variáveis de ambiente `.env`. O arquivo `.env.template` estabelece as variáveis necessárias.
 
 ## Running
+
+- Abra o terminal do MariaDB e siga os comandos do arquivo db.sql
 - Para iniciar a aplicação basta abrir o terminal e digitar `npm run dev`
 
-## Rest Client
-
-- Para rodar as chamadas no rest client certifique-se de alterar os tokens para tokens válidos gerados nas chamadas
-- Basta ir em file -> preferences -> settings
-- Digitar rest client
-- Edit in settings.json
 
 ## Requisições (API)
 
@@ -81,6 +78,7 @@ Crie uma nova request to tipo GET e passe essa rota:
 ### List Appointments(Day)
 
 Crie uma nova request to tipo GET e passe essa rota:
+
 `/api/appointments-day/:data`
 
 - No Header dessa request tem de passar Authorization: Bearer < token > que foi cadastrado na .env como TOKEN .
@@ -89,6 +87,7 @@ Crie uma nova request to tipo GET e passe essa rota:
 ### List Appointments(Week)
 
 Crie uma nova request to tipo GET e passe essa rota:
+
 `/api/appointments-week/:data`
 
 - No Header dessa request tem de passar Authorization: Bearer < token > que foi cadastrado na .env como TOKEN .
@@ -97,6 +96,7 @@ Crie uma nova request to tipo GET e passe essa rota:
 ### List Appointments(Month)
 
 Crie uma nova request to tipo GET e passe essa rota:
+
 `/api/appointments-day/:data`
 
 - No Header dessa request tem de passar Authorization: Bearer < token > que foi cadastrado na .env como TOKEN .
