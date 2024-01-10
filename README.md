@@ -2,7 +2,7 @@
 
 Este repositório contém código referente a aplicação de marcação de agendamentos
 
-## Instalação
+## Install
 
 - Será necessário a instalação do Postman para efetuar as requests, você pode adquirir a partir dessa rota : `https://www.postman.com/downloads/`
 - Será necessário a instalação do mariaDB para efetuar as alterações no banco de dados, você pode adquirir a partir dessa rota : `https://mariadb.org/download/?t=mariadb&p=mariadb&r=11.4.0&os=windows&cpu=x86_64&pkg=msi&m=fder`
@@ -20,7 +20,7 @@ Este repositório contém código referente a aplicação de marcação de agend
 - Para iniciar a aplicação basta abrir o terminal e digitar `npm run dev`
 
 
-## Requisições (API)
+## Requests (API)
 
 ### Create Appoitment
 
