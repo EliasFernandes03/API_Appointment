@@ -1,10 +1,14 @@
 import { findByPhone, createClient } from '../repository/clientRepository';
 import { ClientAttributes, AppointmentAttributes } from '../interfaces/interfaces';
-import consultRepository from '../repository/appointmentRepository';
+import { 
+  createAppointmentRepository, 
+  findAppointmentRepository, 
+  getOneClientRepository 
+} from '../repository/appointmentRepository';
 import { v4 as uuidv4 } from 'uuid';
 import Appointment from '../models/Appointment';
 
-async function createAppointmentService(clientData: ClientAttributes, consultData: AppointmentAttributes): Promise<any> {
+export async function createAppointmentService(clientData: ClientAttributes, consultData: AppointmentAttributes): Promise<any> {
   const { nome, telefone, modeloCarro, placaCarro } = clientData;
   const { dia, horario } = consultData;
 
@@ -14,12 +18,12 @@ async function createAppointmentService(clientData: ClientAttributes, consultDat
     client = await createClient({ nome, telefone, modeloCarro, placaCarro });
   }
 
-  const consultaExistente = await consultRepository.findAppointmentRepository(dia, horario);
+  const consultaExistente = await findAppointmentRepository(dia, horario);
   if (consultaExistente.length > 0) {
     throw new Error('Já existe um agendamento marcado para esse dia e horário.');
   }
 
-  const newAppointment = await consultRepository.createAppointmentRepository({
+  const newAppointment = await createAppointmentRepository({
     id: uuidv4(),
     dia,
     horario,
@@ -44,7 +48,7 @@ export async function updateAppointmentService(id: string, newData: Partial<Appo
       throw new Error('Dia e/ou horário não fornecidos corretamente.');
     }
 
-    const existingConsult = await consultRepository.findAppointmentRepository(dia, horario);
+    const existingConsult = await findAppointmentRepository(dia, horario);
     if (existingConsult.length > 0) {
       throw new Error('Já existe um agendamento marcado para o novo dia e horário.');
     }
@@ -56,7 +60,7 @@ export async function updateAppointmentService(id: string, newData: Partial<Appo
   }
 }
 
-async function softDeleteAppointmentService(id: string): Promise<void> {
+export async function softDeleteAppointmentService(id: string): Promise<void> {
   try {
     const appointment = await Appointment.findByPk(id);
 
@@ -73,7 +77,7 @@ async function softDeleteAppointmentService(id: string): Promise<void> {
 
 export async function getUserApointmentsService(id: string): Promise<any> {
   try {
-    const appointment = await consultRepository.getOneClientRepository(id);
+    const appointment = await getOneClientRepository(id);
     console.log(appointment)
     return appointment;
    
@@ -82,9 +86,3 @@ export async function getUserApointmentsService(id: string): Promise<any> {
   }
 }
 
-export default { 
-  createAppointmentService,
-  updateAppointmentService,
-  softDeleteAppointmentService,
-  getUserApointmentsService, 
-};

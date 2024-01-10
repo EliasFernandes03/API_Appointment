@@ -55,4 +55,4 @@ export async function getOneClientRepository(id: string): Promise<any> {
   });
 }
 
-export default { createAppointmentRepository,findAppointmentRepository,findAppointmentByIdRepository,updateAppointmentRepository,getOneClientRepository };
+

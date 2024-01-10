@@ -1,8 +1,14 @@
 import { Request, Response } from 'express';
-import appointmentService from '../services/appointmentService';
+import { 
+  createAppointmentService,
+  getUserApointmentsService, 
+  softDeleteAppointmentService, 
+  updateAppointmentService,
+   
+} from '../services/appointmentService';
 import { ClientAttributes, AppointmentAttributes } from '../interfaces/interfaces'; 
 
-async function createAppointmentController(req: Request, res: Response) {
+export async function createAppointmentController(req: Request, res: Response) {
   try {
     const { nome, telefone, modeloCarro, placaCarro, dia, horario, } = req.body;
 
@@ -20,7 +26,7 @@ async function createAppointmentController(req: Request, res: Response) {
       deleted: false
     };
 
-    const newAppointment = await appointmentService.createAppointmentService(clientData, consultData); 
+    const newAppointment = await createAppointmentService(clientData, consultData); 
 
     res.status(201).json({ message: 'Agendamento agendada com sucesso!', consulta: newAppointment });
   } catch (error) {
@@ -28,12 +34,12 @@ async function createAppointmentController(req: Request, res: Response) {
   }
 }
 
-async function updateAppointmentController(req: Request, res: Response){
+export async function updateAppointmentController(req: Request, res: Response){
   try {
     const appointmentId = req.params.id; 
     const newData: Partial<AppointmentAttributes> = req.body;
 
-    const updatedAppointment = await appointmentService.updateAppointmentService(appointmentId, newData);
+    const updatedAppointment = await updateAppointmentService(appointmentId, newData);
 
     res.status(200).json({ message: 'Agendamento atualizado com sucesso!', appointment: updatedAppointment });
   } catch (error) {
@@ -43,12 +49,12 @@ async function updateAppointmentController(req: Request, res: Response){
 }
 
 
-async function deleteAppointmentController(req: Request, res: Response){
+export async function deleteAppointmentController(req: Request, res: Response){
   try {
     const { id } = req.params; 
 
 
-    await appointmentService.softDeleteAppointmentService(id);
+    softDeleteAppointmentService(id);
 
     res.status(200).json({ message: 'Agendamento deletado com sucesso.' });
   } catch (error) {
@@ -58,11 +64,11 @@ async function deleteAppointmentController(req: Request, res: Response){
 }
 
 
-async function getUserAppointmentsController(req: Request, res: Response){
+export async function getUserAppointmentsController(req: Request, res: Response){
   try {
     const { id } = req.params;
 
-    const appointment = await appointmentService.getUserApointmentsService(id);
+    const appointment = await getUserApointmentsService(id);
 
     if (!appointment) {
       res.status(404).json({ message: 'Agendamento não encontrado.' });
@@ -75,10 +81,3 @@ async function getUserAppointmentsController(req: Request, res: Response){
     res.status(500).json({ error: 'Erro ao buscar agendamento' });
   }
 }
-
-export default {
-  createAppointmentController,
-  updateAppointmentController,
-  deleteAppointmentController,
-  getUserAppointmentsController,
-};
