@@ -7,7 +7,7 @@ import {
 
 export async function getAppointmentsDayController(req: Request, res: Response) {
     try {
-      const { data } = req.body;
+      const { data } = req.params;
   
       if (!data) {
         res.status(400).json({ error: 'É necessário fornecer a data no corpo da requisição.' });
@@ -24,7 +24,7 @@ export async function getAppointmentsDayController(req: Request, res: Response) 
 
 export async function getAppointmentsWeekController(req: Request, res: Response) {
     try {
-      const { data } = req.body;
+      const { data } = req.params;
   
       if (!data) {
         res.status(400).json({ error: 'É necessário fornecer a data no corpo da requisição.' });
@@ -40,7 +40,7 @@ export async function getAppointmentsWeekController(req: Request, res: Response)
 }
 export async function getAppointmentsMonthController(req: Request, res: Response) {
     try {
-      const { data } = req.body;
+      const { data } = req.params;
   
       if (!data) {
         res.status(400).json({ error: 'É necessário fornecer a data no corpo da requisição.' });

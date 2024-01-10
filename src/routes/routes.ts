@@ -21,9 +21,9 @@ router.put('/delete-appointment/:id', deleteAppointmentController);
 router.get('/get-appointment/:id', getUserAppointmentsController);
 
 // Adm Endpoints
-router.get('/appointments-day', verificarToken, getAppointmentsDayController);
-router.get('/appointments-week', verificarToken, getAppointmentsWeekController);
-router.get('/appointments-month', verificarToken, getAppointmentsMonthController);
+router.get('/appointments-day/:data', verificarToken, getAppointmentsDayController);
+router.get('/appointments-week/:data', verificarToken, getAppointmentsWeekController);
+router.get('/appointments-month/:data', verificarToken, getAppointmentsMonthController);
 
 
 export default router;

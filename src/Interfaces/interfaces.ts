@@ -6,7 +6,7 @@ export interface ClientAttributes {
     placaCarro: string;
   }
 
-//Appointments
+
   export interface AppointmentAttributes {
     id?: string;
     dia: string;
