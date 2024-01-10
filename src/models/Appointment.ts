@@ -1,9 +1,9 @@
 import { DataTypes, Model } from 'sequelize';
-import {sequelize} from '../database/connection';
+import { sequelize } from '../database/connection';
 import Client from './Client';
-import { ConsultAttributes } from '../interfaces/interfaces';
+import { AppointmentAttributes } from '../interfaces/interfaces';
 
-class Consult extends Model<ConsultAttributes> implements ConsultAttributes {
+class Appointment extends Model<AppointmentAttributes> implements AppointmentAttributes {
   public id!: string;
   public dia!: string;
   public horario!: string;
@@ -14,7 +14,7 @@ class Consult extends Model<ConsultAttributes> implements ConsultAttributes {
   public readonly client?: Client;
 }
 
-Consult.init(
+Appointment.init(
   {
     id: {
       type: DataTypes.STRING,
@@ -39,9 +39,9 @@ Consult.init(
   },
   {
     sequelize,
-    modelName: 'Consult',
+    modelName: 'Appointment',
     timestamps:false
   }
 );
 
-export default Consult;
+export default Appointment;

@@ -1,30 +1,35 @@
-import { getAppointmentsDayRepository, getAppointmentsMonth, getAppointmentsWeek } from '../repository/admRepository';
+import Appointment from '../models/Appointment';
+import { 
+  getAppointmentsDayRepository, 
+  getAppointmentsMonth, 
+  getAppointmentsWeekRepository,
+ } from '../repository/admRepository';
 
-export async function buscarConsultasPorDiaService(data: string): Promise<any> {
+export async function getAppointmentDayService(data: string): Promise<any> {
     try {
-      const consultas = await getAppointmentsDayRepository(data);
-      return consultas;
+      const appointment = await getAppointmentsDayRepository(data);
+      return appointment;
     } catch (error) {
-      throw new Error('Erro ao buscar as consultas do dia');
+      throw new Error('Erro ao buscar as revisões do dia');
     }
   }
 
 
-export async function buscarConsultasDaProximaSemanaService(data: string): Promise<any> {
+export async function getAppointmentWeekService(data: string): Promise<Appointment[]> {
   try {
-    const consultas = await getAppointmentsWeek(data);
-    return consultas;
+    const appointment = await getAppointmentsWeekRepository(data);
+    return appointment;
   } catch (error) {
-    throw new Error('Erro ao buscar consultas da próxima semana');
+    throw new Error('Erro ao buscar revisões da próxima semana');
   }
 }
 
 export async function getAppointmentsMonthService(data: string): Promise<any> {
     try {
-      const consultas = await getAppointmentsMonth(data);
-      return consultas;
+      const appointment = await getAppointmentsMonth(data);
+      return appointment;
     } catch (error) {
-      throw new Error('Erro ao buscar consultas do mês');
+      throw new Error('Erro ao buscar revisões do mês');
     }
   }
   

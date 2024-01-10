@@ -1,7 +1,7 @@
 import { DataTypes, Model } from 'sequelize';
 import {sequelize} from '../database/connection';
 import { ClientAttributes } from '../interfaces/interfaces';
-import Consult from './Consult';
+import Appointment from './Appointment';
 
 class Client extends Model<ClientAttributes> implements ClientAttributes {
   public id!: string;
@@ -11,7 +11,7 @@ class Client extends Model<ClientAttributes> implements ClientAttributes {
   public placaCarro!: string;
 
   // Relacionamento com Consulta
-  public readonly consults?: Consult[];
+  public readonly appointment?: Appointment[];
 }
 
 Client.init(
