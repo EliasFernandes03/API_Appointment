@@ -24,7 +24,7 @@ Este repositório contém código referente a aplicação de marcação de agend
 
 ### Create Appoitment
 
-`/api//create-appointment`
+`/api/create-appointment`
 
 Utilize o postman para fazer as chamadas,crie uma requisição do tipo POST e passe esse corpo nela.
 
