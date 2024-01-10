@@ -3,8 +3,8 @@ import { AppointmentAttributes } from '../interfaces/interfaces';
 import { v4 as uuidv4 } from 'uuid';
 
 export async function createAppointmentRepository(consultaData: AppointmentAttributes): Promise<any> {
-  const consultaComUuid = { ...consultaData, id: uuidv4() }; 
-  return Appointment.create(consultaComUuid);
+  const appointmentUuid = { ...consultaData, id: uuidv4() }; 
+  return Appointment.create(appointmentUuid);
 }
 
 export async function findAppointmentRepository(dia: string, horario: string): Promise<AppointmentAttributes[]> {

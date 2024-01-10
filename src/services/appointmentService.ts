@@ -18,8 +18,8 @@ export async function createAppointmentService(clientData: ClientAttributes, con
     client = await createClient({ nome, telefone, modeloCarro, placaCarro });
   }
 
-  const consultaExistente = await findAppointmentRepository(dia, horario);
-  if (consultaExistente.length > 0) {
+  const existingAppointment = await findAppointmentRepository(dia, horario);
+  if (existingAppointment.length > 0) {
     throw new Error('Já existe um agendamento marcado para esse dia e horário.');
   }
 
@@ -48,8 +48,8 @@ export async function updateAppointmentService(id: string, newData: Partial<Appo
       throw new Error('Dia e/ou horário não fornecidos corretamente.');
     }
 
-    const existingConsult = await findAppointmentRepository(dia, horario);
-    if (existingConsult.length > 0) {
+    const existingAppointment = await findAppointmentRepository(dia, horario);
+    if (existingAppointment.length > 0) {
       throw new Error('Já existe um agendamento marcado para o novo dia e horário.');
     }
 

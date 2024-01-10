@@ -10,7 +10,7 @@ import{
     getAppointmentsMonthController, 
     getAppointmentsWeekController 
 } from '../controllers/admController';
-import { verificarToken } from '../middleware/token';
+import { verificarToken } from '../middleware/authToken';
 
 const router = express.Router();
 

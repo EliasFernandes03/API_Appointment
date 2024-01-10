@@ -11,6 +11,6 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/api', appointmentRoutes);
 
-app.listen(process.env.PORT, () => {
-  console.log(`Servidor está rodando em http://localhost:${process.env.PORT}`);
+app.listen(3300, () => {
+  console.log(`Servidor está rodando em http://localhost:3300`);
 });
