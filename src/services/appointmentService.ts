@@ -1,10 +1,10 @@
 import { findByPhone, createClient } from '../repository/clientRepository';
-import { ClientAttributes, ConsultAttributes } from '../interfaces/interfaces';
+import { ClientAttributes, AppointmentAttributes } from '../interfaces/interfaces';
 import consultRepository from '../repository/appointmentRepository';
 import { v4 as uuidv4 } from 'uuid';
-import Consult from '../models/Consult';
+import Appointment from '../models/Appointment';
 
-async function createAppointmentService(clientData: ClientAttributes, consultData: ConsultAttributes): Promise<any> {
+async function createAppointmentService(clientData: ClientAttributes, consultData: AppointmentAttributes): Promise<any> {
   const { nome, telefone, modeloCarro, placaCarro } = clientData;
   const { dia, horario } = consultData;
 
@@ -30,9 +30,9 @@ async function createAppointmentService(clientData: ClientAttributes, consultDat
   return newAppointment;
 }
 
-export async function updateAppointmentService(id: string, newData: Partial<ConsultAttributes>): Promise<any> {
+export async function updateAppointmentService(id: string, newData: Partial<AppointmentAttributes>): Promise<any> {
   try {
-    const appointment = await Consult.findByPk(id);
+    const appointment = await Appointment.findByPk(id);
 
     if (!appointment) {
       throw new Error('Agendamento não encontrado.');
@@ -58,7 +58,7 @@ export async function updateAppointmentService(id: string, newData: Partial<Cons
 
 async function softDeleteAppointmentService(id: string): Promise<void> {
   try {
-    const appointment = await Consult.findByPk(id);
+    const appointment = await Appointment.findByPk(id);
 
     if (!appointment) {
       throw new Error('Agendamento não encontrado.');
@@ -82,4 +82,9 @@ export async function getUserApointmentsService(id: string): Promise<any> {
   }
 }
 
-export default { createAppointmentService,updateAppointmentService,softDeleteAppointmentService,getUserApointmentsService };
+export default { 
+  createAppointmentService,
+  updateAppointmentService,
+  softDeleteAppointmentService,
+  getUserApointmentsService, 
+};

@@ -1,8 +1,8 @@
 import {sequelize} from '../database/connection';
 import Client from '../models/Client';
-import Consult from '../models/Consult';
+import Appointment from '../models/Appointment';
 
-async function connectDatabase(): Promise<void> {
+async function connectDatabase(){
   try {
     await sequelize.authenticate();
     console.log('Conexão bem sucedida com o banco de dados.');
@@ -12,10 +12,10 @@ async function connectDatabase(): Promise<void> {
   }
 }
 
-async function syncTables(): Promise<void> {
+async function syncTables() {
   try {
     await Client.sync(); 
-    await Consult.sync();
+    await Appointment.sync();
     console.log('Tabelas sincronizadas com sucesso.');
   } catch (error) {
     console.error('Erro ao sincronizar tabelas:', error);
@@ -23,12 +23,11 @@ async function syncTables(): Promise<void> {
   }
 }
 
-export async function inicializarBancoDados(): Promise<void> {
+export async function initDatabase() {
   try {
     await connectDatabase();
     await syncTables();
   } catch (error) {
     console.error('Erro ao inicializar banco de dados:', error);
-    throw error;
   }
 }

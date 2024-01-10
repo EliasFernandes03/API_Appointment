@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 import appointmentService from '../services/appointmentService';
-import { ClientAttributes, ConsultAttributes } from '../interfaces/interfaces'; 
+import { ClientAttributes, AppointmentAttributes } from '../interfaces/interfaces'; 
 
-async function createAppointmentController(req: Request, res: Response): Promise<void> {
+async function createAppointmentController(req: Request, res: Response) {
   try {
     const { nome, telefone, modeloCarro, placaCarro, dia, horario, } = req.body;
 
@@ -13,7 +13,7 @@ async function createAppointmentController(req: Request, res: Response): Promise
       placaCarro,
     };
 
-    const consultData: ConsultAttributes = {
+    const consultData: AppointmentAttributes = {
       dia,
       horario,
       ClientId: "0",
@@ -28,10 +28,10 @@ async function createAppointmentController(req: Request, res: Response): Promise
   }
 }
 
-async function updateAppointmentController(req: Request, res: Response): Promise<void> {
+async function updateAppointmentController(req: Request, res: Response){
   try {
     const appointmentId = req.params.id; 
-    const newData: Partial<ConsultAttributes> = req.body;
+    const newData: Partial<AppointmentAttributes> = req.body;
 
     const updatedAppointment = await appointmentService.updateAppointmentService(appointmentId, newData);
 
@@ -43,7 +43,7 @@ async function updateAppointmentController(req: Request, res: Response): Promise
 }
 
 
-async function deleteAppointmentController(req: Request, res: Response): Promise<void> {
+async function deleteAppointmentController(req: Request, res: Response){
   try {
     const { id } = req.params; 
 
@@ -58,7 +58,7 @@ async function deleteAppointmentController(req: Request, res: Response): Promise
 }
 
 
-async function getUserAppointmentsController(req: Request, res: Response): Promise<void> {
+async function getUserAppointmentsController(req: Request, res: Response){
   try {
     const { id } = req.params;
 
@@ -76,4 +76,9 @@ async function getUserAppointmentsController(req: Request, res: Response): Promi
   }
 }
 
-export default { createAppointmentController,updateAppointmentController,deleteAppointmentController,getUserAppointmentsController };
+export default {
+  createAppointmentController,
+  updateAppointmentController,
+  deleteAppointmentController,
+  getUserAppointmentsController,
+};

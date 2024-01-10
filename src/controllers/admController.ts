@@ -1,7 +1,11 @@
 import { Request, Response } from 'express';
-import { buscarConsultasPorDiaService,buscarConsultasDaProximaSemanaService, getAppointmentsMonthService } from '../services/admService';
+import { 
+  getAppointmentDayService,
+  getAppointmentWeekService, 
+  getAppointmentsMonthService 
+} from '../services/admService';
 
-export async function getAppointmentsDayController(req: Request, res: Response): Promise<void> {
+export async function getAppointmentsDayController(req: Request, res: Response) {
     try {
       const { data } = req.body;
   
@@ -10,15 +14,15 @@ export async function getAppointmentsDayController(req: Request, res: Response):
         return;
       }
   
-      const consultas = await buscarConsultasPorDiaService(data);
-      res.status(200).json({ consultas });
+      const appointment = await getAppointmentDayService(data);
+      res.status(200).json({ appointment });
     } catch (error) {
-      console.error('Erro ao buscar consultas por dia:', error);
-      res.status(500).json({ error: 'Erro ao buscar consultas por dia' });
+      console.error('Erro ao buscar revisões por dia:', error);
+      res.status(500).json({ error: 'Erro ao buscar revisões por dia' });
     }
 }
 
-export async function getAppointmentsWeekController(req: Request, res: Response): Promise<void> {
+export async function getAppointmentsWeekController(req: Request, res: Response) {
     try {
       const { data } = req.body;
   
@@ -27,14 +31,14 @@ export async function getAppointmentsWeekController(req: Request, res: Response)
         return;
       }
   
-      const consultas = await buscarConsultasDaProximaSemanaService(data);
-      res.status(200).json({ consultas });
+      const appointment = await getAppointmentWeekService(data);
+      res.status(200).json({ appointment });
     } catch (error) {
-      console.error('Erro ao buscar consultas da próxima semana:', error);
-      res.status(500).json({ error: 'Erro ao buscar consultas da próxima semana' });
+      console.error('Erro ao buscar revisões da próxima semana:', error);
+      res.status(500).json({ error: 'Erro ao buscar revisões da próxima semana' });
     }
 }
-export async function getAppointmentsMonthController(req: Request, res: Response): Promise<void> {
+export async function getAppointmentsMonthController(req: Request, res: Response) {
     try {
       const { data } = req.body;
   
@@ -43,11 +47,15 @@ export async function getAppointmentsMonthController(req: Request, res: Response
         return;
       }
   
-      const consultas = await getAppointmentsMonthService(data);
-      res.status(200).json({ consultas });
+      const appointment = await getAppointmentsMonthService(data);
+      res.status(200).json({ appointment });
     } catch (error) {
-      console.error('Erro ao buscar consultas do mês:', error);
-      res.status(500).json({ error: 'Erro ao buscar consultas do mês' });
+      console.error('Erro ao buscar revisões do mês:', error);
+      res.status(500).json({ error: 'Erro ao buscar revisões do mês' });
     }
   }
-export default { getAppointmentsDayController,getAppointmentsWeekController,getAppointmentsMonthController };
+export default { 
+  getAppointmentsDayController,
+  getAppointmentsWeekController,
+  getAppointmentsMonthController, 
+};

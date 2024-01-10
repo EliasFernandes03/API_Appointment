@@ -7,7 +7,7 @@ export interface ClientAttributes {
   }
 
 //Appointments
-  export interface ConsultAttributes {
+  export interface AppointmentAttributes {
     id?: string;
     dia: string;
     horario: string;
