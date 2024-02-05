@@ -10,7 +10,6 @@ class Appointment extends Model<AppointmentAttributes> implements AppointmentAtt
   public ClientId!: string;
   public deleted!:boolean;
 
-  // Relacionamento com Cliente
   public readonly client?: Client;
 }
 
