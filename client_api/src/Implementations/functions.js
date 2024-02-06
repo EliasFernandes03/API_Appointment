@@ -9,7 +9,7 @@ export const getAppointment = async (id) => {
       const data = await response.json();
       return data.appointment;
     } else if (response.status === 404) {
-      return null; // Não encontrado
+      return null; 
     } else {
       throw new Error('Erro ao buscar compromisso: ' + response.statusText);
     }

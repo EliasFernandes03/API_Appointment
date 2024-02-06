@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom'; 
-import 'bootstrap/dist/css/bootstrap.min.css'; // Importando o Bootstrap CSS
+import 'bootstrap/dist/css/bootstrap.min.css'; 
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { getAppointment, deleteAppointment, updateAppointment } from '../Implementations/functions';
