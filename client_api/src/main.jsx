@@ -8,7 +8,7 @@ import AppointmentList from './routes/root';
 
 const router = createBrowserRouter([
   {
-    path: "/data",
+    path: "/data/:id",
     element: <AppointmentList />,
   },
 ]);

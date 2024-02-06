@@ -16,25 +16,8 @@ const ExamplePage = () => (
 
 function App() {
   return (
-    <Router>
-      <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/example">Exemplo</Link>
-            </li>
-          </ul>
-        </nav>
-
-        <hr />
-
-        <Route exact path="/appointment" component={Home} />
-        <Route path="/example" component={ExamplePage} />
-      </div>
-    </Router>
+    <>
+    </>
   );
 }
 

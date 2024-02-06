@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom'; // Importe o hook useParams para extrair parâmetros da URL
 
 const AppointmentList = () => {
   const [appointment, setAppointment] = useState(null);
+  const { id } = useParams(); // Extrai o parâmetro 'id' da URL da rota
 
   useEffect(() => {
-    // Função para buscar dados da API
     const fetchAppointment = async () => {
       try {
-        const response = await fetch('http://localhost:3300/api/get-appointment/131ecdfe-ab15-45da-9b15-9c8ec60aaa0f'); // Substitua pela sua rota real
+        const response = await fetch(`http://localhost:3300/api/get-appointment/${id}`);
         const data = await response.json();
         setAppointment(data.appointment);
       } catch (error) {
@@ -15,9 +16,8 @@ const AppointmentList = () => {
       }
     };
 
-    // Chama a função para buscar dados ao montar o componente
     fetchAppointment();
-  }, []); // O segundo parâmetro [] indica que isso deve ser executado apenas uma vez no montagem do componente
+  }, [id]); // Dependência 'id' para reexecutar o efeito quando o ID mudar
 
   return (
     <>
