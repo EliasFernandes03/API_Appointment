@@ -6,7 +6,8 @@ import {
 } from "react-router-dom";
 import AppointmentList from './routes/getAppointment';
 import Dia from './routes/day';
-
+import Semana from './routes/week';
+import Mes from './routes/month';
 const router = createBrowserRouter([
   {
     path: "/data/:id",
@@ -15,6 +16,14 @@ const router = createBrowserRouter([
   {
     path: "/dia/:data",
     element: <Dia/>,
+  },
+  {
+    path: "/week/:data",
+    element: <Semana/>,
+  },
+  {
+    path: "/mes/:data",
+    element: <Mes/>,
   },
 ]);
 

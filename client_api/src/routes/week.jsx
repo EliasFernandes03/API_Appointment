@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom'; // Importe o hook useParams do react-router-dom
 
-function Dia() {
+function Semana() {
   const [appointments, setAppointments] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -13,23 +13,21 @@ function Dia() {
   const { data } = useParams();
 
   useEffect(() => {
-    // Função para buscar os compromissos do Dia
     const fetchAppointments = async (data) => {
       try {
-        const response = await axios.get(`${API_BASE_URL}/appointments-day/${data}`, {
+        const response = await axios.get(`${API_BASE_URL}/appointments-week/${data}`, {
           headers: {
             Authorization: `Bearer ${TOKEN}`
           }
         }); 
-        setAppointments(response.data.appointment); 
+        setAppointments(response.data.appointment || []); 
       } catch (error) {
         setErrorMessage('Erro ao carregar os compromissos.');
       }
     };
-
-    // Chame fetchAppointments com o valor capturado da URL
+  
     fetchAppointments(data);
-  }, [data]); // Chama sempre que 'data' mudar
+  }, [data]); 
 
   return (
     <div className="container">
@@ -48,4 +46,4 @@ function Dia() {
   );
 }
 
-export default Dia;
+export default Semana;
