@@ -5,11 +5,16 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import AppointmentList from './routes/getAppointment';
+import Dia from './routes/day';
 
 const router = createBrowserRouter([
   {
     path: "/data/:id",
     element: <AppointmentList />,
+  },
+  {
+    path: "/dia/:data",
+    element: <Dia/>,
   },
 ]);
 
