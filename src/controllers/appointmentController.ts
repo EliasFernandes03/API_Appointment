@@ -2,8 +2,8 @@ import { Request, Response } from 'express';
 import { ClientAttributes, AppointmentAttributes } from '../interfaces/interfaces';
 import AppointmentService from '../services/appointmentService';
 
-class CreateAppointmentController {
-  async handle(req: Request, res: Response) {
+export class AppointmentController {
+  static async create(req: Request, res: Response) {
     try {
       const { nome, telefone, modeloCarro, placaCarro, dia, horario } = req.body;
 
@@ -28,10 +28,8 @@ class CreateAppointmentController {
       res.status(500).json({ error: 'Erro ao agendar: Já existe agendamento marcado para esse horário, por favor tente outro horário entre 8:00 - 17:00' });
     }
   }
-}
 
-class UpdateAppointmentController {
-  async handle(req: Request, res: Response){
+  static async update(req: Request, res: Response) {
     try {
       const appointmentId = req.params.id; 
       const newData: Partial<AppointmentAttributes> = req.body;
@@ -44,10 +42,8 @@ class UpdateAppointmentController {
       res.status(500).json({ error: 'Erro ao atualizar agendamento' });
     }
   }
-}
 
-class DeleteAppointmentController {
-  async handle(req: Request, res: Response){
+  static async delete(req: Request, res: Response) {
     try {
       const { id } = req.params; 
 
@@ -59,10 +55,8 @@ class DeleteAppointmentController {
       res.status(500).json({ error: 'Erro ao deletar agendamento' });
     }
   }
-}
 
-class GetUserAppointmentsController {
-  async handle(req: Request, res: Response){
+  static async getUserAppointments(req: Request, res: Response) {
     try {
       const { id } = req.params;
 
@@ -80,10 +74,3 @@ class GetUserAppointmentsController {
     }
   }
 }
-
-export {
-  CreateAppointmentController,
-  UpdateAppointmentController,
-  DeleteAppointmentController,
-  GetUserAppointmentsController
-};

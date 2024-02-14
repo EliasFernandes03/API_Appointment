@@ -1,9 +1,6 @@
 import express from 'express';
 import { 
-    CreateAppointmentController, 
-    DeleteAppointmentController, 
-    GetUserAppointmentsController, 
-    UpdateAppointmentController 
+    AppointmentController
 } from '../controllers/appointmentController';
 import{ 
     getAppointmentsDayController, 
@@ -14,10 +11,10 @@ import { verificarToken } from '../middleware/authToken';
 
 const router = express.Router();
 
-router.post('/create-appointment', new CreateAppointmentController().handle);
-router.put('/update-appointment/:id', new UpdateAppointmentController().handle);
-router.put('/delete-appointment/:id', new DeleteAppointmentController().handle);
-router.get('/get-appointment/:id', new GetUserAppointmentsController().handle);
+router.post('/create-appointment', AppointmentController.create);
+router.put('/update-appointment/:id', AppointmentController.update);
+router.put('/delete-appointment/:id', AppointmentController.delete);
+router.get('/get-appointment/:id', AppointmentController.getUserAppointments);
 
 // Adm Endpoints
 router.get('/appointments-day/:data', verificarToken, getAppointmentsDayController);
